@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<!--
+    Dev: Idarcio Oliveira
+    Angola
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+
+    <!-- Link e Script para rodar o mapbox-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+
+    <title>MapBox with JavaScript</title>
+</head>
+
+<body>
+    <div class="container mx-auto mt-5">
+        <div class="col-md-10 mx-auto">
+            <div class="card mt-20">
+                <div class="card-header text-center">
+                    <H3>Geolocalização</H3>
+                </div>
+                <div class="col-md-10 mx-auto">
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label">Latitude</label>
+                                        <input id="latitude" type="text" name="latitude" class="form-control m-b-20">
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label">Longitude</label>
+                                        <input id="longitude" type="text" name="longitude" class="form-control m-b-20">
+                                    </div>
+                                    <div class="form-group row">
+                                        <div id="map" style="width: 700px;height: 300px; background-color:grey;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <button onclick="onLocalizar()" type="button"
+                                    class="btn btn-success submit-btn">Localizar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function onLocalizar() {
+
+            const latitude = document.getElementById('latitude');
+            const longitude = document.getElementById('longitude');
+
+            mapboxgl.accessToken = 'pk.eyJ1IjoiaWRhcmNpb29saXZlaXJhIiwiYSI6ImNrOHhrcnBxeTA2c3AzZnAxcjY2MHgzN2IifQ.JJG9GNtuwxdTDXMHVuM6gQ';
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11',
+                zoom: 1,
+            });
+
+            map.addControl(
+                new mapboxgl.GeolocateControl({
+                    positionOptions: {
+                        enableHighAccuracy: true
+                    },
+                    trackUserLocation: true
+                })
+            );
+
+            new mapboxgl.Marker({ draggable: true })
+                .setLngLat([longitude.value, latitude.value])
+                .addTo(map);
+        }
+
+    </script>
+</body>
+
+</html>
