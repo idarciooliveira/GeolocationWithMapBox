@@ -1,6 +1,6 @@
-# GeolocationWithMapBox
+# Geolocation With MapBox
 
-Find a map point with latitude and longitude
+Showcase of fews features that you can do with Mapbox + JavaScript + Bootstrap
 
 # To Run
 
